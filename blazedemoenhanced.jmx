@@ -1,0 +1,1353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan">
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="dp_thread" elementType="Argument">
+            <stringProp name="Argument.name">dp_thread</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="dp_rampup" elementType="Argument">
+            <stringProp name="Argument.name">dp_rampup</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="dp_iteration" elementType="Argument">
+            <stringProp name="Argument.name">dp_iteration</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="==========================================================" elementType="Argument">
+            <stringProp name="Argument.name">==========================================================</stringProp>
+            <stringProp name="Argument.value">==========================================================</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="dp_protocol" elementType="Argument">
+            <stringProp name="Argument.name">dp_protocol</stringProp>
+            <stringProp name="Argument.value">https</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="dp_host" elementType="Argument">
+            <stringProp name="Argument.name">dp_host</stringProp>
+            <stringProp name="Argument.value">blazedemo.com</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="dp_port" elementType="Argument">
+            <stringProp name="Argument.name">dp_port</stringProp>
+            <stringProp name="Argument.value">443</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="==========================================================" elementType="Argument">
+            <stringProp name="Argument.name">==========================================================</stringProp>
+            <stringProp name="Argument.value">==========================================================</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="dp_name" elementType="Argument">
+            <stringProp name="Argument.name">dp_name</stringProp>
+            <stringProp name="Argument.value">${__RandomString(10,abcdefghijklmnopqrstuvwxyz,)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="dp_address" elementType="Argument">
+            <stringProp name="Argument.name">dp_address</stringProp>
+            <stringProp name="Argument.value">${__RandomString(12,abcdefghijklmnopqrstuvwxyz,)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+    </TestPlan>
+    <hashTree>
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager">
+        <collectionProp name="CookieManager.cookies"/>
+        <boolProp name="CookieManager.clearEachIteration">true</boolProp>
+        <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+      </CookieManager>
+      <hashTree/>
+      <CacheManager guiclass="CacheManagerGui" testclass="CacheManager" testname="HTTP Cache Manager" enabled="true">
+        <boolProp name="clearEachIteration">true</boolProp>
+        <boolProp name="useExpires">true</boolProp>
+        <boolProp name="CacheManager.controlledByThread">false</boolProp>
+      </CacheManager>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="filename">C:/Training/Blazedemo/enhanced/input.csv</stringProp>
+        <boolProp name="ignoreFirstLine">true</boolProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">dp_fromPort,dp_toPort,dp_city,dp_state,dp_zip,dp_creditCardMonth,dp_creditCardYear</stringProp>
+      </CSVDataSet>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="SCR01_blazedemo">
+        <stringProp name="ThreadGroup.num_threads">${dp_thread}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${dp_rampup}</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">${dp_iteration}</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="SCR01_T01_Launch" enabled="true">
+          <boolProp name="TransactionController.parent">true</boolProp>
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/-2" enabled="true">
+            <stringProp name="HTTPSampler.domain">${dp_host}</stringProp>
+            <stringProp name="HTTPSampler.port">${dp_port}</stringProp>
+            <stringProp name="HTTPSampler.protocol">${dp_protocol}</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">/</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Sec-Fetch-Mode" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
+                  <stringProp name="Header.value">navigate</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Site" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
+                  <stringProp name="Header.value">none</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Language" elementType="Header">
+                  <stringProp name="Header.name">Accept-Language</stringProp>
+                  <stringProp name="Header.value">en-US,en;q=0.9</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-User" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-User</stringProp>
+                  <stringProp name="Header.value">?1</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</stringProp>
+                </elementProp>
+                <elementProp name="sec-ch-ua" elementType="Header">
+                  <stringProp name="Header.name">sec-ch-ua</stringProp>
+                  <stringProp name="Header.value">&quot;Google Chrome&quot;;v=&quot;143&quot;, &quot;Chromium&quot;;v=&quot;143&quot;, &quot;Not A(Brand&quot;;v=&quot;24&quot;</stringProp>
+                </elementProp>
+                <elementProp name="sec-ch-ua-mobile" elementType="Header">
+                  <stringProp name="Header.name">sec-ch-ua-mobile</stringProp>
+                  <stringProp name="Header.value">?0</stringProp>
+                </elementProp>
+                <elementProp name="sec-ch-ua-platform" elementType="Header">
+                  <stringProp name="Header.name">sec-ch-ua-platform</stringProp>
+                  <stringProp name="Header.value">&quot;Windows&quot;</stringProp>
+                </elementProp>
+                <elementProp name="Upgrade-Insecure-Requests" elementType="Header">
+                  <stringProp name="Header.name">Upgrade-Insecure-Requests</stringProp>
+                  <stringProp name="Header.value">1</stringProp>
+                </elementProp>
+                <elementProp name="Cache-Control" elementType="Header">
+                  <stringProp name="Header.name">Cache-Control</stringProp>
+                  <stringProp name="Header.value">max-age=0</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Encoding" elementType="Header">
+                  <stringProp name="Header.name">Accept-Encoding</stringProp>
+                  <stringProp name="Header.value">gzip, deflate, br, zstd</stringProp>
+                </elementProp>
+                <elementProp name="User-Agent" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Dest" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
+                  <stringProp name="Header.value">document</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="-306252891">BlazeDemo</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message">Expected to contain &quot;BlazeDemo&quot; || ${dp_username} || ${__threadGroupName} || ${__samplerName} || ${__BeanShell(vars.getIteration();,)}</stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">2</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="SCR01_T02_FindFlights" enabled="true">
+          <boolProp name="TransactionController.parent">true</boolProp>
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/reserve.php-9" enabled="true">
+            <stringProp name="HTTPSampler.domain">${dp_host}</stringProp>
+            <stringProp name="HTTPSampler.port">${dp_port}</stringProp>
+            <stringProp name="HTTPSampler.protocol">${dp_protocol}</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">/reserve.php</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="fromPort" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">fromPort</stringProp>
+                  <stringProp name="Argument.value">${dp_fromPort}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="toPort" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">toPort</stringProp>
+                  <stringProp name="Argument.value">${dp_toPort}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Sec-Fetch-Mode" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
+                  <stringProp name="Header.value">navigate</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">${dp_protocol}://${dp_host}/</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Site" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
+                  <stringProp name="Header.value">same-origin</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Language" elementType="Header">
+                  <stringProp name="Header.name">Accept-Language</stringProp>
+                  <stringProp name="Header.value">en-US,en;q=0.9</stringProp>
+                </elementProp>
+                <elementProp name="Origin" elementType="Header">
+                  <stringProp name="Header.name">Origin</stringProp>
+                  <stringProp name="Header.value">${dp_host}://${dp_host}</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-User" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-User</stringProp>
+                  <stringProp name="Header.value">?1</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</stringProp>
+                </elementProp>
+                <elementProp name="sec-ch-ua" elementType="Header">
+                  <stringProp name="Header.name">sec-ch-ua</stringProp>
+                  <stringProp name="Header.value">&quot;Google Chrome&quot;;v=&quot;143&quot;, &quot;Chromium&quot;;v=&quot;143&quot;, &quot;Not A(Brand&quot;;v=&quot;24&quot;</stringProp>
+                </elementProp>
+                <elementProp name="sec-ch-ua-mobile" elementType="Header">
+                  <stringProp name="Header.name">sec-ch-ua-mobile</stringProp>
+                  <stringProp name="Header.value">?0</stringProp>
+                </elementProp>
+                <elementProp name="sec-ch-ua-platform" elementType="Header">
+                  <stringProp name="Header.name">sec-ch-ua-platform</stringProp>
+                  <stringProp name="Header.value">&quot;Windows&quot;</stringProp>
+                </elementProp>
+                <elementProp name="Upgrade-Insecure-Requests" elementType="Header">
+                  <stringProp name="Header.name">Upgrade-Insecure-Requests</stringProp>
+                  <stringProp name="Header.value">1</stringProp>
+                </elementProp>
+                <elementProp name="Content-Type" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
+                </elementProp>
+                <elementProp name="Cache-Control" elementType="Header">
+                  <stringProp name="Header.name">Cache-Control</stringProp>
+                  <stringProp name="Header.value">max-age=0</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Encoding" elementType="Header">
+                  <stringProp name="Header.name">Accept-Encoding</stringProp>
+                  <stringProp name="Header.value">gzip, deflate, br, zstd</stringProp>
+                </elementProp>
+                <elementProp name="User-Agent" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Dest" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
+                  <stringProp name="Header.value">document</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="dc_flight" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+              <stringProp name="RegexExtractor.refname">dc_flight</stringProp>
+              <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; value=&quot;(.*?)&quot; name=&quot;flight&quot;&gt;</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default">dc_flight_not_found</stringProp>
+              <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
+              <stringProp name="RegexExtractor.match_number">-1</stringProp>
+              <stringProp name="TestPlan.comments">Match count: 5
+Match[1][0]=&lt;input type=&quot;hidden&quot; value=&quot;43&quot; name=&quot;flight&quot;&gt;
+Match[1][1]=43
+Match[2][0]=&lt;input type=&quot;hidden&quot; value=&quot;234&quot; name=&quot;flight&quot;&gt;
+Match[2][1]=234
+Match[3][0]=&lt;input type=&quot;hidden&quot; value=&quot;9696&quot; name=&quot;flight&quot;&gt;
+Match[3][1]=9696
+Match[4][0]=&lt;input type=&quot;hidden&quot; value=&quot;12&quot; name=&quot;flight&quot;&gt;
+Match[4][1]=12
+Match[5][0]=&lt;input type=&quot;hidden&quot; value=&quot;4346&quot; name=&quot;flight&quot;&gt;
+Match[5][1]=4346</stringProp>
+            </RegexExtractor>
+            <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="dc_price" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+              <stringProp name="RegexExtractor.refname">dc_price</stringProp>
+              <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; value=&quot;(.*?)&quot; name=&quot;price&quot;&gt;</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default">dc_price_not_found</stringProp>
+              <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
+              <stringProp name="RegexExtractor.match_number">-1</stringProp>
+              <stringProp name="TestPlan.comments">Match count: 5
+Match[1][0]=&lt;input type=&quot;hidden&quot; value=&quot;472.56&quot; name=&quot;price&quot;&gt;
+Match[1][1]=472.56
+Match[2][0]=&lt;input type=&quot;hidden&quot; value=&quot;432.98&quot; name=&quot;price&quot;&gt;
+Match[2][1]=432.98
+Match[3][0]=&lt;input type=&quot;hidden&quot; value=&quot;200.98&quot; name=&quot;price&quot;&gt;
+Match[3][1]=200.98
+Match[4][0]=&lt;input type=&quot;hidden&quot; value=&quot;765.32&quot; name=&quot;price&quot;&gt;
+Match[4][1]=765.32
+Match[5][0]=&lt;input type=&quot;hidden&quot; value=&quot;233.98&quot; name=&quot;price&quot;&gt;
+Match[5][1]=233.98</stringProp>
+            </RegexExtractor>
+            <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="dc_airline" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+              <stringProp name="RegexExtractor.refname">dc_airline</stringProp>
+              <stringProp name="RegexExtractor.regex">&lt;input type=&quot;hidden&quot; value=&quot;(.*?)&quot; name=&quot;airline&quot;&gt;</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default">dc_airline_not_found</stringProp>
+              <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
+              <stringProp name="RegexExtractor.match_number">-1</stringProp>
+              <stringProp name="TestPlan.comments">Match count: 5
+Match[1][0]=&lt;input type=&quot;hidden&quot; value=&quot;Virgin America&quot; name=&quot;airline&quot;&gt;
+Match[1][1]=Virgin America
+Match[2][0]=&lt;input type=&quot;hidden&quot; value=&quot;United Airlines&quot; name=&quot;airline&quot;&gt;
+Match[2][1]=United Airlines
+Match[3][0]=&lt;input type=&quot;hidden&quot; value=&quot;Aer Lingus&quot; name=&quot;airline&quot;&gt;
+Match[3][1]=Aer Lingus
+Match[4][0]=&lt;input type=&quot;hidden&quot; value=&quot;Virgin America&quot; name=&quot;airline&quot;&gt;
+Match[4][1]=Virgin America
+Match[5][0]=&lt;input type=&quot;hidden&quot; value=&quot;Lufthansa&quot; name=&quot;airline&quot;&gt;
+Match[5][1]=Lufthansa</stringProp>
+            </RegexExtractor>
+            <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="dc_time" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+              <stringProp name="RegexExtractor.refname">dc_time</stringProp>
+              <stringProp name="RegexExtractor.regex">&lt;td&gt;(\d{1,2}:\d{2}\s[AP]M)&lt;/td&gt;\s*&lt;td&gt;(\d{1,2}:\d{2}\s[AP]M)&lt;/td&gt;</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default">dc_time_not_found</stringProp>
+              <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
+              <stringProp name="RegexExtractor.match_number">-1</stringProp>
+              <stringProp name="TestPlan.comments">Match count: 5
+Match[1][0]=&lt;td&gt;1:43 AM&lt;/td&gt;
+                &lt;td&gt;9:45 PM&lt;/td&gt;
+Match[1][1]=1:43 AM
+Match[1][2]=9:45 PM
+Match[2][0]=&lt;td&gt;7:43 AM&lt;/td&gt;
+                &lt;td&gt;10:45 PM&lt;/td&gt;
+Match[2][1]=7:43 AM
+Match[2][2]=10:45 PM
+Match[3][0]=&lt;td&gt;5:27 AM&lt;/td&gt;
+                &lt;td&gt;8:22 PM&lt;/td&gt;
+Match[3][1]=5:27 AM
+Match[3][2]=8:22 PM
+Match[4][0]=&lt;td&gt;11:23 AM&lt;/td&gt;
+                &lt;td&gt;1:45 PM&lt;/td&gt;
+Match[4][1]=11:23 AM
+Match[4][2]=1:45 PM
+Match[5][0]=&lt;td&gt;1:45 AM&lt;/td&gt;
+                &lt;td&gt;8:34 PM&lt;/td&gt;
+Match[5][1]=1:45 AM
+Match[5][2]=8:34 PM</stringProp>
+            </RegexExtractor>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="1007794446">BlazeDemo - reserve</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message">Expected to contain &quot;BlazeDemo - reserve&quot; || ${dp_username} || ${__threadGroupName} || ${__samplerName} || ${__BeanShell(vars.getIteration();,)}</stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">16</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="SCR01_T03_chooseflights" enabled="true">
+          <boolProp name="TransactionController.parent">true</boolProp>
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/purchase.php-11" enabled="true">
+            <stringProp name="HTTPSampler.domain">${dp_host}</stringProp>
+            <stringProp name="HTTPSampler.port">${dp_port}</stringProp>
+            <stringProp name="HTTPSampler.protocol">${dp_protocol}</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">/purchase.php</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="flight" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">flight</stringProp>
+                  <stringProp name="Argument.value">${dc_selected_flight}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="price" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">price</stringProp>
+                  <stringProp name="Argument.value">${dc_selected_price}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="airline" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                  <stringProp name="Argument.name">airline</stringProp>
+                  <stringProp name="Argument.value">${dc_selected_airline}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="fromPort" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">fromPort</stringProp>
+                  <stringProp name="Argument.value">${dp_toPort}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="toPort" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">toPort</stringProp>
+                  <stringProp name="Argument.value">${dp_fromPort}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Sec-Fetch-Mode" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
+                  <stringProp name="Header.value">navigate</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">${dp_protocol}://${dp_host}/reserve.php</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Site" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
+                  <stringProp name="Header.value">same-origin</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Language" elementType="Header">
+                  <stringProp name="Header.name">Accept-Language</stringProp>
+                  <stringProp name="Header.value">en-US,en;q=0.9</stringProp>
+                </elementProp>
+                <elementProp name="Origin" elementType="Header">
+                  <stringProp name="Header.name">Origin</stringProp>
+                  <stringProp name="Header.value">${dp_host}://${dp_host}</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-User" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-User</stringProp>
+                  <stringProp name="Header.value">?1</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</stringProp>
+                </elementProp>
+                <elementProp name="sec-ch-ua" elementType="Header">
+                  <stringProp name="Header.name">sec-ch-ua</stringProp>
+                  <stringProp name="Header.value">&quot;Google Chrome&quot;;v=&quot;143&quot;, &quot;Chromium&quot;;v=&quot;143&quot;, &quot;Not A(Brand&quot;;v=&quot;24&quot;</stringProp>
+                </elementProp>
+                <elementProp name="sec-ch-ua-mobile" elementType="Header">
+                  <stringProp name="Header.name">sec-ch-ua-mobile</stringProp>
+                  <stringProp name="Header.value">?0</stringProp>
+                </elementProp>
+                <elementProp name="sec-ch-ua-platform" elementType="Header">
+                  <stringProp name="Header.name">sec-ch-ua-platform</stringProp>
+                  <stringProp name="Header.value">&quot;Windows&quot;</stringProp>
+                </elementProp>
+                <elementProp name="Upgrade-Insecure-Requests" elementType="Header">
+                  <stringProp name="Header.name">Upgrade-Insecure-Requests</stringProp>
+                  <stringProp name="Header.value">1</stringProp>
+                </elementProp>
+                <elementProp name="Content-Type" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
+                </elementProp>
+                <elementProp name="Cache-Control" elementType="Header">
+                  <stringProp name="Header.name">Cache-Control</stringProp>
+                  <stringProp name="Header.value">max-age=0</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Encoding" elementType="Header">
+                  <stringProp name="Header.name">Accept-Encoding</stringProp>
+                  <stringProp name="Header.value">gzip, deflate, br, zstd</stringProp>
+                </elementProp>
+                <elementProp name="User-Agent" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Dest" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
+                  <stringProp name="Header.value">document</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor-Price(min)" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">int count = (vars.get(&apos;dc_price_matchNr&apos;) ?: &apos;0&apos;) as int
+if (count == 0) {
+    vars.put(&apos;dc_min_price&apos;, &apos;NOT_FOUND&apos;)
+    return
+}
+BigDecimal minPrice = new BigDecimal(vars.get(&apos;dc_price_1&apos;))
+
+for (int i = 2; i &lt;= count; i++) {
+    BigDecimal price = new BigDecimal(vars.get(&apos;dc_price_&apos; + i))
+    if (price &lt; minPrice) {
+        minPrice = price
+    }
+}
+vars.put(&apos;dc_selected_price&apos;, minPrice.toPlainString())
+log.info(&quot;Minimum price selected = &quot; + minPrice)
+
+</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor-PriceSum(max)" enabled="false">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">int count = (vars.get(&apos;dc_price_matchNr&apos;) ?: &apos;0&apos;) as int
+
+if (count == 0) {
+    vars.put(&apos;dc_max_digit_sum&apos;, &apos;NOT_FOUND&apos;)
+    return
+}
+int maxDigitSum = 0
+String maxDigitSumPrice = &quot;&quot;
+for (int i = 1; i &lt;= count; i++) {
+    String priceStr = vars.get(&apos;dc_price_&apos; + i)  
+    String digitsOnly = priceStr.replaceAll(&quot;[^0-9]&quot;, &quot;&quot;)
+    int digitSum = 0
+    digitsOnly.each { ch -&gt;
+        digitSum += ch.toInteger()
+    }
+    log.info(&quot;Price = ${priceStr}, Digits = ${digitsOnly}, Digit Sum = ${digitSum}&quot;)
+    if (digitSum &gt; maxDigitSum) {
+        maxDigitSum = digitSum
+        maxDigitSumPrice = priceStr
+    }
+}
+vars.put(&apos;dc_max_digit_sum&apos;, maxDigitSum.toString())
+vars.put(&apos;dc_selected_price&apos;, maxDigitSumPrice)
+
+log.info(&quot;Maximum digit sum = &quot; + maxDigitSum)
+log.info(&quot;Price with maximum digit sum = &quot; + maxDigitSumPrice)
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor-DA(least)" enabled="false">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.*
+import java.time.format.*
+int count = (vars.get(&apos;dc_time_matchNr&apos;) ?: &apos;0&apos;) as int
+if (count == 0) {
+    vars.put(&apos;dc_min_duration&apos;, &apos;NOT_FOUND&apos;)
+    vars.put(&apos;dc_min_duration_index&apos;, &apos;NOT_FOUND&apos;)
+    return
+}
+DateTimeFormatter fmt = DateTimeFormatter.ofPattern(&quot;h:mm a&quot;, Locale.ENGLISH)
+long minMinutes = Long.MAX_VALUE
+int minIndex = -1
+for (int i = 1; i &lt;= count; i++) {
+String departStr = vars.get(&quot;dc_time_&quot; + i + &quot;_g1&quot;)
+String arriveStr = vars.get(&quot;dc_time_&quot; + i + &quot;_g2&quot;)
+
+    LocalTime depart = LocalTime.parse(departStr, fmt)
+    LocalTime arrive = LocalTime.parse(arriveStr, fmt)
+
+    long minutes = Duration.between(depart, arrive).toMinutes()
+    if (minutes &lt; 0) {
+        minutes += 24 * 60
+    }
+    log.info(&quot;Flight ${i} → ${departStr} to ${arriveStr} = ${minutes} mins&quot;)
+    if (minutes &lt; minMinutes) {
+        minMinutes = minutes
+        minIndex = i
+    }
+}
+vars.put(&quot;dc_min_duration&quot;, minMinutes.toString())
+vars.put(&quot;dc_min_duration_index&quot;, minIndex.toString())
+log.info(&quot;Shortest duration = ${minMinutes} minutes&quot;)
+log.info(&quot;Flight index with least time = ${minIndex}&quot;)
+
+String flightNo = vars.get(&quot;dc_flight_&quot; + minIndex)
+String airline  = vars.get(&quot;dc_airline_&quot; + minIndex)
+String price    = vars.get(&quot;dc_price_&quot; + minIndex)
+
+vars.put(&quot;dc_selected_flight&quot;, flightNo)
+vars.put(&quot;dc_selected_airline&quot;, airline)
+vars.put(&quot;dc_selected_price&quot;, price)
+
+log.info(&quot;Shortest Flight Details:&quot;)
+log.info(&quot;Flight Index  : &quot; + minIndex)
+log.info(&quot;Flight Number : &quot; + flightNo)
+log.info(&quot;Airline       : &quot; + airline)
+log.info(&quot;Price         : &quot; + price)
+log.info(&quot;Duration (min): &quot; + minMinutes)
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor-Depart(min)" enabled="false">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.*
+import java.time.format.*
+int count = (vars.get(&apos;dc_time_matchNr&apos;) ?: &apos;0&apos;) as int
+if (count == 0) {
+    vars.put(&apos;dc_min_depart_time&apos;, &apos;NOT_FOUND&apos;)
+    vars.put(&apos;dc_min_depart_index&apos;, &apos;NOT_FOUND&apos;)
+    return
+}
+DateTimeFormatter fmt = DateTimeFormatter.ofPattern(&quot;h:mm a&quot;, Locale.ENGLISH)
+LocalTime minTime = null
+int minIndex = -1
+
+for (int i = 1; i &lt;= count; i++) {
+
+    String departStr = vars.get(&quot;dc_time_&quot; + i + &quot;_g1&quot;)
+
+    if (!departStr) {
+        log.warn(&quot;Missing depart time at index &quot; + i)
+        continue
+    }
+
+    LocalTime departTime = LocalTime.parse(departStr, fmt)
+
+    log.info(&quot;Flight ${i} → Depart = ${departStr}&quot;)
+
+    if (minTime == null || departTime.isBefore(minTime)) {
+        minTime = departTime
+        minIndex = i
+    }
+}
+
+vars.put(&quot;dc_min_depart_time&quot;, minTime.toString())
+vars.put(&quot;dc_min_depart_index&quot;, minIndex.toString())
+
+String flightNo = vars.get(&quot;dc_flight_&quot; + minIndex + &quot;_g1&quot;)
+String airline  = vars.get(&quot;dc_airline_&quot; + minIndex + &quot;_g1&quot;)
+String price    = vars.get(&quot;dc_price_&quot; + minIndex + &quot;_g1&quot;)
+
+vars.put(&quot;dc_selected_flight&quot;, flightNo)
+vars.put(&quot;dc_selected_airline&quot;, airline)
+vars.put(&quot;dc_selected_price&quot;, price)
+
+log.info(&quot;======================================&quot;)
+log.info(&quot;Earliest Departure Flight Details:&quot;)
+log.info(&quot;Flight Index  : &quot; + minIndex)
+log.info(&quot;Flight Number : &quot; + flightNo)
+log.info(&quot;Airline       : &quot; + airline)
+log.info(&quot;Price         : &quot; + price)
+log.info(&quot;Depart Time   : &quot; + minTime)
+log.info(&quot;======================================&quot;)</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor-Depart(max)" enabled="false">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.*
+import java.time.format.*
+int count = (vars.get(&apos;dc_time_matchNr&apos;) ?: &apos;0&apos;) as int
+if (count == 0) {
+    vars.put(&apos;dc_max_depart_time&apos;, &apos;NOT_FOUND&apos;)
+    vars.put(&apos;dc_max_depart_index&apos;, &apos;NOT_FOUND&apos;)
+    return
+}
+DateTimeFormatter fmt = DateTimeFormatter.ofPattern(&quot;h:mm a&quot;, Locale.ENGLISH)
+LocalTime maxTime = null
+int maxIndex = -1
+for (int i = 1; i &lt;= count; i++) {
+
+    String departStr = vars.get(&quot;dc_time_&quot; + i + &quot;_g1&quot;)
+
+    if (!departStr) {
+        log.warn(&quot;Missing depart time at index &quot; + i)
+        continue
+    }
+
+    LocalTime departTime = LocalTime.parse(departStr, fmt)
+
+    log.info(&quot;Flight ${i} → Depart = ${departStr}&quot;)
+
+    if (maxTime == null || departTime.isAfter(maxTime)) {
+        maxTime = departTime
+        maxIndex = i
+    }
+}
+
+vars.put(&quot;dc_max_depart_time&quot;, maxTime.toString())
+vars.put(&quot;dc_max_depart_index&quot;, maxIndex.toString())
+
+String flightNo = vars.get(&quot;dc_flightNo_&quot; + maxIndex + &quot;_g1&quot;)
+String airline  = vars.get(&quot;dc_airline_&quot; + maxIndex + &quot;_g1&quot;)
+String price    = vars.get(&quot;dc_price_&quot; + maxIndex + &quot;_g1&quot;)
+
+vars.put(&quot;dc_selected_flight&quot;, flightNo)
+vars.put(&quot;dc_selected_airline&quot;, airline)
+vars.put(&quot;dc_selected_price&quot;, price)
+
+log.info(&quot;======================================&quot;)
+log.info(&quot;Latest Departure Flight Details:&quot;)
+log.info(&quot;Flight Index  : &quot; + maxIndex)
+log.info(&quot;Flight Number : &quot; + flightNo)
+log.info(&quot;Airline       : &quot; + airline)
+log.info(&quot;Price         : &quot; + price)
+log.info(&quot;Depart Time   : &quot; + maxTime)
+log.info(&quot;======================================&quot;)
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor-Arrival(min)" enabled="false">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.*
+import java.time.format.*
+int count = (vars.get(&apos;dc_time_matchNr&apos;) ?: &apos;0&apos;) as int
+if (count == 0) {
+    vars.put(&apos;dc_min_depart_time&apos;, &apos;NOT_FOUND&apos;)
+    vars.put(&apos;dc_min_depart_index&apos;, &apos;NOT_FOUND&apos;)
+    return
+}
+DateTimeFormatter fmt = DateTimeFormatter.ofPattern(&quot;h:mm a&quot;, Locale.ENGLISH)
+
+LocalTime minTime = null
+int minIndex = -1
+
+for (int i = 1; i &lt;= count; i++) {
+
+    String departStr = vars.get(&quot;dc_time_&quot; + i + &quot;_g2&quot;)
+
+    if (!departStr) {
+        log.warn(&quot;Missing depart time at index &quot; + i)
+        continue
+    }
+    LocalTime departTime = LocalTime.parse(departStr, fmt)
+    log.info(&quot;Flight ${i} → Depart = ${departStr}&quot;)
+    if (minTime == null || departTime.isBefore(minTime)) {
+        minTime = departTime
+        minIndex = i
+    }
+}
+vars.put(&quot;dc_min_depart_time&quot;, minTime.toString())
+vars.put(&quot;dc_min_depart_index&quot;, minIndex.toString())
+
+String flightNo = vars.get(&quot;dc_flight_&quot; + minIndex + &quot;_g1&quot;)
+String airline  = vars.get(&quot;dc_airline_&quot; + minIndex + &quot;_g1&quot;)
+String price    = vars.get(&quot;dc_price_&quot; + minIndex + &quot;_g1&quot;)
+
+vars.put(&quot;dc_selected_flight&quot;, flightNo)
+vars.put(&quot;dc_selected_airline&quot;, airline)
+vars.put(&quot;dc_selected_price&quot;, price)
+
+log.info(&quot;======================================&quot;)
+log.info(&quot;Earliest Departure Flight Details:&quot;)
+log.info(&quot;Flight Index  : &quot; + minIndex)
+log.info(&quot;Flight Number : &quot; + flightNo)
+log.info(&quot;Airline       : &quot; + airline)
+log.info(&quot;Price         : &quot; + price)
+log.info(&quot;Depart Time   : &quot; + minTime)
+log.info(&quot;======================================&quot;)</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor-Arrival(max)" enabled="false">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.*
+import java.time.format.*
+int count = (vars.get(&apos;dc_time_matchNr&apos;) ?: &apos;0&apos;) as int
+if (count == 0) {
+    vars.put(&apos;dc_max_depart_time&apos;, &apos;NOT_FOUND&apos;)
+    vars.put(&apos;dc_max_depart_index&apos;, &apos;NOT_FOUND&apos;)
+    return
+}
+DateTimeFormatter fmt = DateTimeFormatter.ofPattern(&quot;h:mm a&quot;, Locale.ENGLISH)
+LocalTime maxTime = null
+int maxIndex = -1
+for (int i = 1; i &lt;= count; i++) {
+    String departStr = vars.get(&quot;dc_time_&quot; + i + &quot;_g2&quot;)
+    if (!departStr) {
+        log.warn(&quot;Missing depart time at index &quot; + i)
+        continue
+    }
+    LocalTime departTime = LocalTime.parse(departStr, fmt)
+
+    log.info(&quot;Flight ${i} → Depart = ${departStr}&quot;)
+    
+    if (maxTime == null || departTime.isAfter(maxTime)) {
+        maxTime = departTime
+        maxIndex = i
+    }
+}
+vars.put(&quot;dc_max_depart_time&quot;, maxTime.toString())
+vars.put(&quot;dc_max_depart_index&quot;, maxIndex.toString())
+
+String flightNo = vars.get(&quot;dc_flight_&quot; + maxIndex + &quot;_g1&quot;)
+String airline  = vars.get(&quot;dc_airline_&quot; + maxIndex + &quot;_g1&quot;)
+String price    = vars.get(&quot;dc_price_&quot; + maxIndex + &quot;_g1&quot;)
+
+vars.put(&quot;dc_selected_flight&quot;, flightNo)
+vars.put(&quot;dc_selected_airline&quot;, airline)
+vars.put(&quot;dc_selected_price&quot;, price)
+
+log.info(&quot;======================================&quot;)
+log.info(&quot;Latest Departure Flight Details:&quot;)
+log.info(&quot;Flight Index  : &quot; + maxIndex)
+log.info(&quot;Flight Number : &quot; + flightNo)
+log.info(&quot;Airline       : &quot; + airline)
+log.info(&quot;Price         : &quot; + price)
+log.info(&quot;Depart Time   : &quot; + maxTime)
+log.info(&quot;======================================&quot;)
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor-Airline(ascending)" enabled="false">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">int count = (vars.get(&apos;dc_airline_matchNr&apos;) ?: &apos;0&apos;) as int
+
+if (count == 0) {
+    log.error(&quot;No airline data found&quot;)
+    return
+}
+def rows = []
+for (int i = 1; i &lt;= count; i++) {
+    rows.add([
+        index   : i,
+        airline : vars.get(&quot;dc_airline_&quot; + i + &quot;_g1&quot;),
+        flight  : vars.get(&quot;dc_flight_&quot; + i + &quot;_g1&quot;),
+        price   : vars.get(&quot;dc_price_&quot; + i + &quot;_g1&quot;)
+    ])
+}
+rows.sort { a, b -&gt;
+    a.airline &lt;=&gt; b.airline
+}
+
+for (int i = 0; i &lt; rows.size(); i++) {
+    vars.put(&quot;dc_sorted_airline_&quot; + (i + 1), rows[i].airline)
+    vars.put(&quot;dc_sorted_flight_&quot;  + (i + 1), rows[i].flight)
+    vars.put(&quot;dc_sorted_price_&quot;   + (i + 1), rows[i].price)
+    vars.put(&quot;dc_sorted_index_&quot;   + (i + 1), rows[i].index.toString()) 
+}
+
+vars.put(&quot;dc_sorted_count&quot;, rows.size().toString())
+log.info(&quot;Sorted Airlines (ASC): &quot; + rows*.airline)
+int iteration = vars.getIteration()
+int total = vars.get(&quot;dc_sorted_count&quot;) as int
+
+int pick = ((iteration - 1) % total) + 1
+
+vars.put(&quot;dc_selected_airline&quot;, vars.get(&quot;dc_sorted_airline_&quot; + pick))
+vars.put(&quot;dc_selected_flight&quot;,  vars.get(&quot;dc_sorted_flight_&quot; + pick))
+vars.put(&quot;dc_selected_price&quot;,   vars.get(&quot;dc_sorted_price_&quot; + pick))
+vars.put(&quot;dc_selected_index&quot;,   vars.get(&quot;dc_sorted_index_&quot; + pick))
+
+log.info(&quot;Iteration ${iteration} → &quot; +
+         &quot;Airline=${vars.get(&apos;dc_selected_airline&apos;)} | &quot; +
+         &quot;Flight=${vars.get(&apos;dc_selected_flight&apos;)} | &quot; +
+         &quot;Price=${vars.get(&apos;dc_selected_price&apos;)}&quot;)
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor-Flightnocount(max)" enabled="false">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">int count = (vars.get(&apos;dc_flight_matchNr&apos;) ?: &apos;0&apos;) as int
+if (count == 0) {
+    log.error(&quot;No flight data found&quot;)
+    return
+}
+int maxDigits = 0
+def maxFlights = []
+for (int i = 1; i &lt;= count; i++) {
+
+    String flight  = vars.get(&quot;dc_flight_&quot; + i + &quot;_g1&quot;)
+    String airline = vars.get(&quot;dc_airline_&quot;  + i + &quot;_g1&quot;)
+    String price   = vars.get(&quot;dc_price_&quot;    + i + &quot;_g1&quot;)
+
+    int digits = flight.length()
+
+    if (digits &gt; maxDigits) {
+        maxDigits = digits
+        maxFlights.clear()
+        maxFlights.add([
+            flight  : flight,
+            airline : airline,
+            price   : price
+        ])
+    }
+    else if (digits == maxDigits) {
+        maxFlights.add([
+            flight  : flight,
+            airline : airline,
+            price   : price
+        ])
+    }
+}
+def selected = maxFlights[0]
+vars.put(&quot;dc_selected_flight&quot;,  selected.flight)
+vars.put(&quot;dc_selected_airline&quot;, selected.airline)
+vars.put(&quot;dc_selected_price&quot;,   selected.price)
+vars.put(&quot;dc_sel_digits&quot;,  maxDigits.toString())
+
+log.info(&quot;===== FLIGHT WITH HIGHEST DIGITS =====&quot;)
+log.info(&quot;Flight No : ${selected.flight}&quot;)
+log.info(&quot;Airline   : ${selected.airline}&quot;)
+log.info(&quot;Price     : ${selected.price}&quot;)
+log.info(&quot;Digits    : ${maxDigits}&quot;)
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="dc_cardtype" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+              <stringProp name="RegexExtractor.refname">dc_cardtype</stringProp>
+              <stringProp name="RegexExtractor.regex">&lt;option value=&quot;(.*?)&quot;&gt;</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default">dc_cardtype_not_found</stringProp>
+              <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
+              <stringProp name="RegexExtractor.match_number">2</stringProp>
+              <stringProp name="TestPlan.comments">Match count: 3
+Match[1][0]=&lt;option value=&quot;visa&quot;&gt;
+Match[1][1]=visa
+Match[2][0]=&lt;option value=&quot;amex&quot;&gt;
+Match[2][1]=amex
+Match[3][0]=&lt;option value=&quot;dinersclub&quot;&gt;
+Match[3][1]=dinersclub</stringProp>
+            </RegexExtractor>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="-972447940">BlazeDemo Purchase</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message">Expected to contain &quot;BlazeDemo Purchase&quot; || ${dp_username} || ${__threadGroupName} || ${__samplerName} || ${__BeanShell(vars.getIteration();,)}</stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">16</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="SCR01_T04_purchaseflights" enabled="true">
+          <boolProp name="TransactionController.parent">true</boolProp>
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/confirmation.php-13" enabled="true">
+            <stringProp name="HTTPSampler.domain">${dp_host}</stringProp>
+            <stringProp name="HTTPSampler.port">${dp_port}</stringProp>
+            <stringProp name="HTTPSampler.protocol">${dp_protocol}</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">/confirmation.php</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="_token" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">_token</stringProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="inputName" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">inputName</stringProp>
+                  <stringProp name="Argument.value">${dp_name_lower}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="address" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                  <stringProp name="Argument.name">address</stringProp>
+                  <stringProp name="Argument.value">${dp_address}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="city" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">city</stringProp>
+                  <stringProp name="Argument.value">${dp_city}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="state" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">state</stringProp>
+                  <stringProp name="Argument.value">${dp_state}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="zipCode" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">zipCode</stringProp>
+                  <stringProp name="Argument.value">${dp_zip}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="cardType" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">cardType</stringProp>
+                  <stringProp name="Argument.value">${dc_cardtype}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="creditCardNumber" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">creditCardNumber</stringProp>
+                  <stringProp name="Argument.value">${__Random(1000,9999,cc1)} ${__Random(1000,9999,cc2)} ${__Random(1000,9999,cc3)} ${__Random(1000,9999,cc4)}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="creditCardMonth" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">creditCardMonth</stringProp>
+                  <stringProp name="Argument.value">${__Random(1,12,)}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="creditCardYear" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">creditCardYear</stringProp>
+                  <stringProp name="Argument.value">${__Random(2010,2050,)}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="nameOnCard" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">nameOnCard</stringProp>
+                  <stringProp name="Argument.value">${dp_name_upper}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Sec-Fetch-Mode" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
+                  <stringProp name="Header.value">navigate</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">${dp_protocol}://${dp_host}/purchase.php</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Site" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
+                  <stringProp name="Header.value">same-origin</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Language" elementType="Header">
+                  <stringProp name="Header.name">Accept-Language</stringProp>
+                  <stringProp name="Header.value">en-US,en;q=0.9</stringProp>
+                </elementProp>
+                <elementProp name="Origin" elementType="Header">
+                  <stringProp name="Header.name">Origin</stringProp>
+                  <stringProp name="Header.value">${dp_protocol}://${dp_host}</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-User" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-User</stringProp>
+                  <stringProp name="Header.value">?1</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</stringProp>
+                </elementProp>
+                <elementProp name="sec-ch-ua" elementType="Header">
+                  <stringProp name="Header.name">sec-ch-ua</stringProp>
+                  <stringProp name="Header.value">&quot;Google Chrome&quot;;v=&quot;143&quot;, &quot;Chromium&quot;;v=&quot;143&quot;, &quot;Not A(Brand&quot;;v=&quot;24&quot;</stringProp>
+                </elementProp>
+                <elementProp name="sec-ch-ua-mobile" elementType="Header">
+                  <stringProp name="Header.name">sec-ch-ua-mobile</stringProp>
+                  <stringProp name="Header.value">?0</stringProp>
+                </elementProp>
+                <elementProp name="sec-ch-ua-platform" elementType="Header">
+                  <stringProp name="Header.name">sec-ch-ua-platform</stringProp>
+                  <stringProp name="Header.value">&quot;Windows&quot;</stringProp>
+                </elementProp>
+                <elementProp name="Upgrade-Insecure-Requests" elementType="Header">
+                  <stringProp name="Header.name">Upgrade-Insecure-Requests</stringProp>
+                  <stringProp name="Header.value">1</stringProp>
+                </elementProp>
+                <elementProp name="Content-Type" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
+                </elementProp>
+                <elementProp name="Cache-Control" elementType="Header">
+                  <stringProp name="Header.name">Cache-Control</stringProp>
+                  <stringProp name="Header.value">max-age=0</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Encoding" elementType="Header">
+                  <stringProp name="Header.name">Accept-Encoding</stringProp>
+                  <stringProp name="Header.value">gzip, deflate, br, zstd</stringProp>
+                </elementProp>
+                <elementProp name="User-Agent" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Dest" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
+                  <stringProp name="Header.value">document</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="1218547952">BlazeDemo Confirmation</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message">Expected to contain &quot;BlazeDemo Confirmation&quot; || ${dp_username} || ${__threadGroupName} || ${__samplerName} || ${__BeanShell(vars.getIteration();,)}</stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">16</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">def name = vars.get(&apos;dp_name&apos;)
+
+if (name != null) {
+    vars.put(&apos;dp_name_lower&apos;, name.toLowerCase())
+    vars.put(&apos;dp_name_upper&apos;, name.toUpperCase())
+}
+
+log.info(&quot;Name lowercase = &quot; + vars.get(&apos;dp_name_lower&apos;))
+log.info(&quot;Name uppercase = &quot; + vars.get(&apos;dp_name_upper&apos;))
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
+        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="false">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>true</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <hostname>true</hostname>
+            <threadCounts>true</threadCounts>
+            <sampleCount>true</sampleCount>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ProxyControl guiclass="ProxyControlGui" testclass="ProxyControl" testname="HTTP(S) Test Script Recorder" enabled="false">
+        <stringProp name="ProxyControlGui.port">8888</stringProp>
+        <collectionProp name="ProxyControlGui.exclude_list">
+          <stringProp name="1179605444">(?i).*\.(bmp|css|js|gif|ico|jpe?g|png|swf|eot|otf|ttf|mp4|woff|woff2)</stringProp>
+          <stringProp name="-88591710">www\.download\.windowsupdate\.com.*</stringProp>
+          <stringProp name="1323576868">toolbarqueries\.google\..*</stringProp>
+          <stringProp name="1629558731">clients.*\.google.*</stringProp>
+          <stringProp name="-1899150273">api\.bing\.com.*</stringProp>
+          <stringProp name="305776760">(?i).*\.(bmp|css|js|gif|ico|jpe?g|png|swf|eot|otf|ttf|mp4|woff|woff2)[\?;].*</stringProp>
+          <stringProp name="1779943373">us\.update\.toolbar\.yahoo\.com.*</stringProp>
+          <stringProp name="1815174768">safebrowsing.*\.google\.com.*</stringProp>
+          <stringProp name="587935979">g\.msn.*</stringProp>
+          <stringProp name="110431874">.*msg\.yahoo\.com.*</stringProp>
+          <stringProp name="1206954446">tiles.*\.mozilla\.com.*</stringProp>
+          <stringProp name="-1314416226">sqm\.microsoft\.com.*</stringProp>
+          <stringProp name="1726898318">geo\.yahoo\.com.*</stringProp>
+          <stringProp name="-192420923">.*yimg\.com.*</stringProp>
+          <stringProp name="2118375536">www\.google-analytics\.com.*</stringProp>
+          <stringProp name="1739087931">http?://self-repair\.mozilla\.org.*</stringProp>
+          <stringProp name="805311387">windowsupdate\.microsoft\.com.*</stringProp>
+          <stringProp name="-1424663473">.*detectportal\.firefox\.com.*</stringProp>
+          <stringProp name="11072252">.*toolbar\.yahoo\.com.*</stringProp>
+          <stringProp name="-190610036">.*\.google\.com.*/safebrowsing/.*</stringProp>
+          <stringProp name="-958112859">toolbar\.google\.com.*</stringProp>
+          <stringProp name="-1279148329">pgq\.yahoo\.com.*</stringProp>
+          <stringProp name="-1435252351">toolbar\.avg\.com/.*</stringProp>
+          <stringProp name="-576820688">toolbar\.msn\.com.*</stringProp>
+        </collectionProp>
+        <collectionProp name="ProxyControlGui.include_list"/>
+        <boolProp name="ProxyControlGui.capture_http_headers">true</boolProp>
+        <intProp name="ProxyControlGui.grouping_mode">0</intProp>
+        <boolProp name="ProxyControlGui.add_assertion">false</boolProp>
+        <stringProp name="ProxyControlGui.sampler_type_name"></stringProp>
+        <boolProp name="ProxyControlGui.sampler_redirect_automatically">false</boolProp>
+        <boolProp name="ProxyControlGui.sampler_follow_redirects">true</boolProp>
+        <boolProp name="ProxyControlGui.use_keepalive">true</boolProp>
+        <boolProp name="ProxyControlGui.sampler_download_images">false</boolProp>
+        <boolProp name="ProxyControlGui.regex_match">true</boolProp>
+        <stringProp name="ProxyControlGui.content_type_include"></stringProp>
+        <stringProp name="ProxyControlGui.content_type_exclude"></stringProp>
+        <boolProp name="ProxyControlGui.notify_child_sl_filtered">false</boolProp>
+        <stringProp name="ProxyControlGui.proxy_prefix_http_sampler_name"></stringProp>
+        <intProp name="ProxyControlGui.proxy_http_sampler_naming_mode">0</intProp>
+        <stringProp name="ProxyControlGui.proxy_pause_http_sampler"></stringProp>
+        <boolProp name="ProxyControlGui.detect_graphql_request">true</boolProp>
+        <stringProp name="ProxyControlGui.default_encoding">UTF-8</stringProp>
+      </ProxyControl>
+      <hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>true</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>true</responseData>
+              <samplerData>true</samplerData>
+              <xml>true</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>true</responseHeaders>
+              <requestHeaders>true</requestHeaders>
+              <responseDataOnError>true</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <fileName>true</fileName>
+              <hostname>true</hostname>
+              <threadCounts>true</threadCounts>
+              <sampleCount>true</sampleCount>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">C:\Training\Blazedemo\enhanced\blazeres.xml</stringProp>
+          <boolProp name="ResultCollector.success_only_logging">true</boolProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
